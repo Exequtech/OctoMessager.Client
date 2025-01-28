@@ -2,6 +2,6 @@
 {
     public class MessageResponse
     {
-        public string MessageId { get; set; }
+        public required string MessageId { get; set; }
     }
 }
