@@ -1,9 +1,4 @@
-﻿using OctoMessager.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OctoMessager.Client.Models.Responses;
 
 namespace OctoMessager.client.Interfaces
 {
