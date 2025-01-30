@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace OctoMessager.client.Configuration
+namespace OctoMessager.Client.Configuration
 {
     public class OctoClientConfig
     {

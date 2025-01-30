@@ -1,4 +1,4 @@
-﻿namespace OctoMessager.client.Models.Responses
+﻿namespace OctoMessager.Client.Models.Responses
 {
     public class MessageResponse
     {

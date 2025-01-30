@@ -1,4 +1,4 @@
-﻿namespace OctoMessager.client.Models.Content
+﻿namespace OctoMessager.Client.Models.Content
 {
     public class PollContent
     {

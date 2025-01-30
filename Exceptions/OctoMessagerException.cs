@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OctoMessager.client.Exceptions
+namespace OctoMessager.Client.Exceptions
 {
     public class OctoMessengerException : Exception
     {

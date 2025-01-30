@@ -1,9 +1,9 @@
-﻿using OctoMessager.client.Configuration;
-using OctoMessager.client.Exceptions;
-using OctoMessager.client.Interfaces;
-using OctoMessager.client.Models.Content;
-using OctoMessager.client.Models.Requests;
-using OctoMessager.client.Models.Responses;
+﻿using OctoMessager.Client.Configuration;
+using OctoMessager.Client.Exceptions;
+using OctoMessager.Client.Interfaces;
+using OctoMessager.Client.Models.Content;
+using OctoMessager.Client.Models.Requests;
+using OctoMessager.Client.Models.Responses;
 using System.Text;
 using System.Text.Json;
 

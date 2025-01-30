@@ -1,6 +1,6 @@
-﻿using OctoMessager.client.Models.Responses;
+﻿using OctoMessager.Client.Models.Responses;
 
-namespace OctoMessager.client.Interfaces
+namespace OctoMessager.Client.Interfaces
 {
     public interface IOctoClient
     {
