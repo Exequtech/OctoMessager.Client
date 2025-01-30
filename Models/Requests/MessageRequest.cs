@@ -1,7 +1,6 @@
 ﻿using OctoMessager.client.Models.Content;
-using OctoMessager.Client.Models.Content;
 
-namespace OctoMessager.Client.Models.Requests
+namespace OctoMessager.client.Models.Requests
 {
     public class MessageRequest
     {

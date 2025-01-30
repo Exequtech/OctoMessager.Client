@@ -1,4 +1,4 @@
-﻿using OctoMessager.Client.Models.Responses;
+﻿using OctoMessager.client.Models.Responses;
 
 namespace OctoMessager.client.Interfaces
 {

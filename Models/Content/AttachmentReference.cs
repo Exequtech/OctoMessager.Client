@@ -1,4 +1,4 @@
-﻿namespace OctoMessager.Client.Models.Content
+﻿namespace OctoMessager.client.Models.Content
 {
     public class AttachmentReference
     {
