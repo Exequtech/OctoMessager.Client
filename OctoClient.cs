@@ -7,7 +7,7 @@ using OctoMessager.client.Models.Responses;
 using System.Text;
 using System.Text.Json;
 
-namespace OctoMessager.client
+namespace OctoMessager.Client
 {
     public class OctoClient : IOctoClient, IDisposable
     {
