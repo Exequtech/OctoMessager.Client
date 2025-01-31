@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using OctoMessager.Client.Models.Webhooks;
+using System.Text.Json;
 
 namespace OctoMessager.Client.Configuration
 {
@@ -7,7 +8,8 @@ namespace OctoMessager.Client.Configuration
         public string BaseUrl { get; set; } = "https://octo-messager.exequtech.com";
         public JsonSerializerOptions JsonSerializerOptions { get; set; } = new JsonSerializerOptions
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            Converters = { new WebhookEventConverter() },
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
     }
 }

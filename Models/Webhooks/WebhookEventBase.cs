@@ -1,9 +1,13 @@
 ﻿namespace OctoMessager.Client.Models.Webhooks
 {
-    public abstract class WebhookEventBase
+    public interface IWebhookEvent
     {
-        public required string EventId { get; set; }
-        public required string EventType { get; set; }
-        public required DateTime Timestamp { get; set; }
+        public string EventVersion { get; }
+        public string EventType { get; }
+    }
+    public abstract class V1WebhookEvent : IWebhookEvent
+    {
+        public string EventVersion => "v1";
+        public abstract string EventType { get; }
     }
 }

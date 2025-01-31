@@ -4,6 +4,7 @@ using OctoMessager.Client.Interfaces;
 using OctoMessager.Client.Models.Content;
 using OctoMessager.Client.Models.Requests;
 using OctoMessager.Client.Models.Responses;
+using OctoMessager.Client.Models.Webhooks;
 using System.Text;
 using System.Text.Json;
 
@@ -166,6 +167,11 @@ namespace OctoMessager.Client
                 _disposed = true;
                 GC.SuppressFinalize(this);
             }
+        }
+
+        public IWebhookEvent? ParseEvent(string json)
+        {
+            return JsonSerializer.Deserialize<IWebhookEvent>(json, _config.JsonSerializerOptions);
         }
     }
 }
