@@ -24,12 +24,12 @@ namespace OctoMessager.Client.Models.Webhooks
             {
                 case WebhookEventType.MessageReceived:
                     {
-                        V1MessageBase msg = JsonSerializer.Deserialize<V1MessageBase>(dataObj) ?? throw new JsonException("Invalid msg received body");
+                        V1MessageBase msg = JsonSerializer.Deserialize<V1MessageBase>(dataObj, options) ?? throw new JsonException("Invalid msg received body");
                         return new V1MessageReceived() { Message = msg };
                     }
                 case WebhookEventType.MessageSent:
                     {
-                        V1MessageBase msg = JsonSerializer.Deserialize<V1MessageBase>(dataObj) ?? throw new JsonException("Invalid msg sent body");
+                        V1MessageBase msg = JsonSerializer.Deserialize<V1MessageBase>(dataObj, options) ?? throw new JsonException("Invalid msg sent body");
                         return new V1MessageSent() { Message = msg };
                     }   
                 default:

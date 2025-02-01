@@ -17,10 +17,10 @@ namespace OctoMessager.Client
         private readonly HttpClient _httpClient;
         private readonly OctoClientOptions _options;
 
-        public OctoClient(HttpClient httpClient, IOptions<OctoClientOptions> options)
+        public OctoClient(HttpClient httpClient, OctoClientOptions options)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+            _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         public async Task<MessageResponse> SendTextMessageAsync(string to, string message)

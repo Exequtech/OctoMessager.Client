@@ -1,4 +1,6 @@
-﻿namespace OctoMessager.Client.Models.Webhooks
+﻿using System.Text.Json.Serialization;
+
+namespace OctoMessager.Client.Models.Webhooks
 {
     public class V1MessageBase
     {
