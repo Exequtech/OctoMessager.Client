@@ -1,29 +1,26 @@
-﻿using OctoMessager.Client.Configuration;
-using OctoMessager.Client.Exceptions;
-using OctoMessager.Client.Interfaces;
-using OctoMessager.Client.Models.Content;
-using OctoMessager.Client.Models.Requests;
-using OctoMessager.Client.Models.Responses;
-using OctoMessager.Client.Models.Webhooks;
+﻿using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
 
+using OctoMessager.Client.Models.Requests;
+using OctoMessager.Client.Models.Responses;
+using OctoMessager.Client.Models.Content;
+using OctoMessager.Client.Models.Webhooks;
+using OctoMessager.Client.Configuration;
+using OctoMessager.Client.Exceptions;
+using OctoMessager.Client.Interfaces;
+
 namespace OctoMessager.Client
 {
-    public class OctoClient : IOctoClient, IDisposable
+    public class OctoClient : IOctoClient
     {
         private readonly HttpClient _httpClient;
-        private readonly OctoClientConfig _config;
-        private bool _disposed;
+        private readonly OctoClientOptions _options;
 
-        public OctoClient(string apiKey, OctoClientConfig? config = null)
+        public OctoClient(HttpClient httpClient, IOptions<OctoClientOptions> options)
         {
-            _config = config ?? new OctoClientConfig();
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_config.BaseUrl)
-            };
-            _httpClient.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         }
 
         public async Task<MessageResponse> SendTextMessageAsync(string to, string message)
@@ -128,11 +125,9 @@ namespace OctoMessager.Client
 
         private async Task<MessageResponse> SendRequestAsync<T>(T payload)
         {
-            ValidateNotDisposed();
-
             try
             {
-                var json = JsonSerializer.Serialize(payload, _config.JsonSerializerOptions);
+                var json = JsonSerializer.Serialize(payload, _options.JsonSerializerOptions);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await _httpClient.PostAsync("v1/message/sendText", content);
@@ -145,7 +140,7 @@ namespace OctoMessager.Client
                         response.StatusCode);
                 }
 
-                var messageResponse = JsonSerializer.Deserialize<MessageResponse>(responseContent, _config.JsonSerializerOptions);
+                var messageResponse = JsonSerializer.Deserialize<MessageResponse>(responseContent, _options.JsonSerializerOptions);
 
                 return messageResponse ?? throw new OctoMessengerException("Failed to deserialize the response from the server");
             }
@@ -153,25 +148,11 @@ namespace OctoMessager.Client
             {
                 throw new OctoMessengerException("An error occurred while sending the message", ex);
             }
-        
-        }
-
-        private void ValidateNotDisposed() =>
-            ObjectDisposedException.ThrowIf(_disposed, nameof(OctoClient));
-
-        public void Dispose()
-        {
-            if (!_disposed)
-            {
-                _httpClient.Dispose();
-                _disposed = true;
-                GC.SuppressFinalize(this);
-            }
         }
 
         public IWebhookEvent? ParseEvent(string json)
         {
-            return JsonSerializer.Deserialize<IWebhookEvent>(json, _config.JsonSerializerOptions);
+            return JsonSerializer.Deserialize<IWebhookEvent>(json, _options.JsonSerializerOptions);
         }
     }
 }
